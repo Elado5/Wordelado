@@ -57,22 +57,23 @@ const Game = () => {
 	};
 
     // function that "uses up" a guess if the word exists in the word bank, and then displays if any letter matches or exists in the daily word.
-    const sendGuess = () => {
+    const sendGuess = async () => {
 
         if(currentRow === 1){
             if(currentIndex === 5) {
-                for (let index = 0; index < 4; index++) {
+                const greenLoad :string[] = [];
+                const yellowLoad :string[] = [];
+                for (let index = 0; index < 5; index++) {
                     if(dailyWord[index] === row1[index]){
-                        const arrCopy = greenCubes.slice();
-                        arrCopy.push(`key${index}`);
-                        setGreenCubes(arrCopy);
+                        greenLoad.push(`key${index}`);
+                        
                     }
                     else if (dailyWord.includes(row1[index])){
-                        const arrCopy = yellowCubes.slice();
-                        arrCopy.push(`key${index}`);
-                        setYellowCubes(arrCopy);
+                        yellowLoad.push(`key${index}`);
                     }                   
                 }
+                setGreenCubes(greenLoad);
+                setYellowCubes(yellowLoad);
             }              
         }
         if(currentRow === 2){
@@ -122,10 +123,7 @@ const Game = () => {
                 }
             }      
         }
-        console.log('currentRow', currentRow)
-        console.log('currentIndex', currentIndex)
-        console.log('yellowCubes', yellowCubes)
-        console.log('greenCubes', greenCubes)
+
     }
 
 	return (
