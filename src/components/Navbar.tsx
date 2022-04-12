@@ -7,8 +7,8 @@ const Navbar = () => {
 		<nav className="navbar">
 			<FontAwesomeIcon icon={faCog} id="icon" />
 			<div className="title">
-				<p>word</p>
-				<p >elado</p>
+				<p className="title-half">וורד</p>
+				<p className="title-half2">אלעדו</p>
 			</div>
 			<FontAwesomeIcon icon={faQuestionCircle} id="icon" />
 		</nav>

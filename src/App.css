@@ -1,9 +1,9 @@
 * {
-  background-color: #141414;
   direction: rtl;
 }
 
 .App {
+  background-color: #191919;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13,6 +13,7 @@
           flex-direction: column;
   -ms-flex-line-pack: center;
       align-content: center;
+  height: 100vh;
 }
 
 .navbar {
@@ -33,6 +34,7 @@
   background-color: #1e1e1e;
   color: white;
   height: 4rem;
+  border-bottom: solid 1px #c8c8c8;
 }
 
 .navbar .title {
@@ -49,7 +51,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #1e1e1e;
+  font-size: 1.3rem;
+}
+
+.navbar .title .title-half {
+  color: #aeb3ae;
+}
+
+.navbar .title .title-half2 {
+  color: #a7c5ae;
 }
 
 .navbar #icon {
@@ -77,23 +87,7 @@
 }
 
 .cube-grid {
-  color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-item-align: center;
-      align-self: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   margin-top: 4vh;
-  width: 50%;
-  height: 50vh;
 }
 
 .cube-grid .cube-row {
@@ -116,6 +110,14 @@
   width: 7vh;
   height: 7vh;
   margin: 0.3rem;
+}
+
+.cube-grid .cube-row .green-cube {
+  background-color: green;
+}
+
+.cube-grid .cube-row .yellow-cube {
+  background-color: #ffe600;
 }
 
 .letter-cube-grid {

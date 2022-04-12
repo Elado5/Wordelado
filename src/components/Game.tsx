@@ -1,71 +1,181 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 
 const Game = () => {
-	const [ letter1, setLetter1 ] = useState<string>("");
-	const [ letter2, setLetter2 ] = useState<string>("");
-	const [ letter3, setLetter3 ] = useState<string>("");
-	const [ letter4, setLetter4 ] = useState<string>("");
-	const [ letter5, setLetter5 ] = useState<string>("");
-	const [ letter6, setLetter6 ] = useState<string>("");
-	const [ letter7, setLetter7 ] = useState<string>("");
-	const [ letter8, setLetter8 ] = useState<string>("");
-	const [ letter9, setLetter9 ] = useState<string>("");
-	const [ letter10, setLetter10 ] = useState<string>("");
-	const [ letter11, setLetter11 ] = useState<string>("");
-	const [ letter12, setLetter12 ] = useState<string>("");
-	const [ letter13, setLetter13 ] = useState<string>("");
-	const [ letter14, setLetter14 ] = useState<string>("");
-	const [ letter15, setLetter15 ] = useState<string>("");
-	const [ letter16, setLetter16 ] = useState<string>("");
-	const [ letter17, setLetter17 ] = useState<string>("");
-	const [ letter18, setLetter18 ] = useState<string>("");
-	const [ letter19, setLetter19 ] = useState<string>("");
-	const [ letter20, setLetter20 ] = useState<string>("");
-	const [ letter21, setLetter21 ] = useState<string>("");
-	const [ letter22, setLetter22 ] = useState<string>("");
-	const [ letter23, setLetter23 ] = useState<string>("");
-	const [ letter24, setLetter24 ] = useState<string>("");
-	const [ letter25, setLetter25 ] = useState<string>("");
+	const [ dailyWord, setDailyWord ] = useState<string>("אהבתי"); //The daily chosen word
+	const [ currentRow, setCurrentRow ] = useState<number>(1); //The current row which letters are being added to
+	const [ currentIndex, setCurrentIndex ] = useState<number>(0); //The current index in the word which letters are being added to
+
+	const [ guess1, setGuess1 ] = useState<string>("");
+	const [ guess2, setGuess2 ] = useState<string>("");
+	const [ guess3, setGuess3 ] = useState<string>("");
+	const [ guess4, setGuess4 ] = useState<string>("");
+	const [ guess5, setGuess5 ] = useState<string>("");
+
+	const [ row1, setRow1 ] = useState<string[]>([ "", "", "", "", "" ]);
+	const [ row2, setRow2 ] = useState<string[]>([ "", "", "", "", "" ]);
+	const [ row3, setRow3 ] = useState<string[]>([ "", "", "", "", "" ]);
+	const [ row4, setRow4 ] = useState<string[]>([ "", "", "", "", "" ]);
+	const [ row5, setRow5 ] = useState<string[]>([ "", "", "", "", "" ]);
+
+    const [yellowCubes, setYellowCubes ] = useState<string[]>([]);
+    const [greenCubes, setGreenCubes ] = useState<string[]>([]);
+
+
+	const letterPress = (letter: string) => {
+
+        if(currentIndex > 4 || currentIndex < 0){
+            return;
+        }
+		if (currentRow === 1) {
+			const rowCopy = row1.slice();
+			rowCopy[currentIndex] = letter;
+			setRow1(rowCopy);
+			setCurrentIndex(currentIndex + 1);
+		} else if (currentRow === 2) {
+			const rowCopy = row1.slice();
+			rowCopy[currentIndex] = letter;
+			setRow2(rowCopy);
+			setCurrentIndex(currentIndex + 1);
+		} else if (currentRow === 3) {
+			const rowCopy = row1.slice();
+			rowCopy[currentIndex] = letter;
+			setRow3(rowCopy);
+			setCurrentIndex(currentIndex + 1);
+		} else if (currentRow === 4) {
+			const rowCopy = row1.slice();
+			rowCopy[currentIndex] = letter;
+			setRow4(rowCopy);
+			setCurrentIndex(currentIndex + 1);
+		} else if (currentRow === 5) {
+			const rowCopy = row1.slice();
+			rowCopy[currentIndex] = letter;
+			setRow5(rowCopy);
+			setCurrentIndex(currentIndex + 1);
+		}
+	};
+
+    // function that "uses up" a guess if the word exists in the word bank, and then displays if any letter matches or exists in the daily word.
+    const sendGuess = () => {
+
+        if(currentRow === 1){
+            if(currentIndex === 5) {
+                for (let index = 0; index < 4; index++) {
+                    if(dailyWord[index] === row1[index]){
+                        const arrCopy = greenCubes.slice();
+                        arrCopy.push(`key${index}`);
+                        setGreenCubes(arrCopy);
+                    }
+                    else if (dailyWord.includes(row1[index])){
+                        const arrCopy = yellowCubes.slice();
+                        arrCopy.push(`key${index}`);
+                        setYellowCubes(arrCopy);
+                    }                   
+                }
+            }              
+        }
+        if(currentRow === 2){
+            if(currentIndex === 5) {
+                for (let index = 0; index < row2.length; index++) {
+                    if(dailyWord[index] === row2[index]){
+                        setGreenCubes([...greenCubes, `key${index+5}`]);
+                    }
+                    else if (dailyWord.includes(row2[index])){
+                        setYellowCubes([...yellowCubes ,`key${index+5}` ]);
+                    }                   
+                }
+            }      
+        }
+        if(currentRow === 3){            
+            if(currentIndex === 5) {
+            for (let index = 0; index < row3.length; index++) {
+                if(dailyWord[index] === row3[index]){
+                    setGreenCubes([...greenCubes, `key${index+10}`]);
+                }
+                else if (dailyWord.includes(row3[index])){
+                    setYellowCubes([...yellowCubes ,`key${index+10}` ]);
+                }                   
+            }
+        }      }
+        if(currentRow === 4){
+            if(currentIndex === 5) {
+                for (let index = 0; index < row4.length; index++) {
+                    if(dailyWord[index] === row4[index]){
+                        setGreenCubes([...greenCubes, `key${index+15}`]);
+                    }
+                    else if (dailyWord.includes(row4[index])){
+                        setYellowCubes([...yellowCubes ,`key${index+15}` ]);
+                    }                   
+                }
+            }      
+        }
+        if(currentRow === 5){
+            if(currentIndex === 5) {
+                for (let index = 0; index < row5.length; index++) {
+                    if(dailyWord[index] === row5[index]){
+                        setGreenCubes([...greenCubes, `key${index+20}`]);
+                    }
+                    else if (dailyWord.includes(row5[index])){
+                        setYellowCubes([...yellowCubes ,`key${index+20}` ]);
+                    }                   
+                }
+            }      
+        }
+        console.log('currentRow', currentRow)
+        console.log('currentIndex', currentIndex)
+        console.log('yellowCubes', yellowCubes)
+        console.log('greenCubes', greenCubes)
+    }
 
 	return (
-
+		<div className="game">
 			<div className="cube-grid">
-				<div className="cube-row">
-					<p className="text-cube">{letter1}</p>
-					<p className="text-cube">{letter2}</p>
-					<p className="text-cube">{letter3}</p>
-					<p className="text-cube">{letter4}</p>
-					<p className="text-cube">{letter5}</p>
+				<div className="cube-row">{row1.map((value, key) => <p className={`text-cube ${yellowCubes.includes("key" + key) ? "yellow-cube" : ""}`} id={"key"+key}>{value}</p>)}</div>
+				<div className="cube-row">{row2.map((value, key) => <p className={`text-cube ${yellowCubes.includes("key" + key + 5) ? "yellow-cube" : ""}`} id={"key"+(key+5)}>{value}</p>)}</div>
+				<div className="cube-row">{row3.map((value, key) => <p className={`text-cube ${yellowCubes.includes("key" + key + 10) ? "yellow-cube" : ""}`} id={"key"+(key+10)}>{value}</p>)}</div>
+				<div className="cube-row">{row4.map((value, key) => <p className={`text-cube ${yellowCubes.includes("key" + key + 15) ? "yellow-cube" : ""}`} id={"key"+(key+15)}>{value}</p>)}</div>
+				<div className="cube-row">{row5.map((value, key) => <p className={`text-cube ${yellowCubes.includes("key" + key + 20) ? "yellow-cube" : ""}`} id={"key"+(key+20)}>{value}</p>)}</div>
+			</div>
+
+			<div className="letter-cube-grid">
+				<div className="letter-row">
+					<p className="letter-cube backspace">
+						<FontAwesomeIcon icon={faBackspace} />
+					</p>
+					<p className="letter-cube" onClick={(e) => letterPress("א")}>א</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ב")}>ב</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ג")}>ג</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ד")}>ד</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ה")}>ה</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ו")}>ו</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ז")}>ז</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ח")}>ח</p>
 				</div>
-				<div className="cube-row">
-					<p className="text-cube">{letter6}</p>
-					<p className="text-cube">{letter7}</p>
-					<p className="text-cube">{letter8}</p>
-					<p className="text-cube">{letter9}</p>
-					<p className="text-cube">{letter10}</p>
+				<div className="letter-row">
+					<p className="letter-cube" onClick={(e) => letterPress("ט")}>ט</p>
+					<p className="letter-cube"onClick={(e) => letterPress("י")}>י</p>
+					<p className="letter-cube" onClick={(e) => letterPress("כ")}>כ</p>
+                    <p className="letter-cube" onClick={(e) => letterPress("ל")}>ל</p>
+					<p className="letter-cube" onClick={(e) => letterPress("מ")}>מ</p>
+					<p className="letter-cube" onClick={(e) => letterPress("נ")}>נ</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ס")}>ס</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ע")}>ע</p>
+					<p className="letter-cube" onClick={(e) => letterPress("פ")}>פ</p>
+					<p className="letter-cube" onClick={(e) => letterPress("צ")}>צ</p>
 				</div>
-				<div className="cube-row">
-					<p className="text-cube">{letter11}</p>
-					<p className="text-cube">{letter12}</p>
-					<p className="text-cube">{letter13}</p>
-					<p className="text-cube">{letter14}</p>
-					<p className="text-cube">{letter15}</p>
-				</div>
-				<div className="cube-row">
-					<p className="text-cube">{letter16}</p>
-					<p className="text-cube">{letter17}</p>
-					<p className="text-cube">{letter18}</p>
-					<p className="text-cube">{letter19}</p>
-					<p className="text-cube">{letter20}</p>
-				</div>
-				<div className="cube-row">
-					<p className="text-cube">{letter21}</p>
-					<p className="text-cube">{letter22}</p>
-					<p className="text-cube">{letter23}</p>
-					<p className="text-cube">{letter24}</p>
-					<p className="text-cube">{letter25}</p>
+				<div className="letter-row">
+					<p className="letter-cube" onClick={(e) => letterPress("ק")}>ק</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ש")}>ש</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ת")}>ת</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ץ")}>ף</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ם")}>ם</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ץ")}>ץ</p>
+					<p className="letter-cube" onClick={(e) => letterPress("ך")}>ך</p>
+					<p className="letter-cube enter" onClick={(e) => sendGuess()}>Enter</p>
 				</div>
 			</div>
+		</div>
 	);
 };
 
