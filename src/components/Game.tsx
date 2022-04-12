@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 
 const Game = () => {
-	const [ letter1, setLetter1 ] = useState("");
-	const [ letter2, setLetter2 ] = useState("");
-	const [ letter3, setLetter3 ] = useState("");
-	const [ letter4, setLetter4 ] = useState("");
-	const [ letter5, setLetter5 ] = useState("");
-	const [ letter6, setLetter6 ] = useState("");
-	const [ letter7, setLetter7 ] = useState("");
-	const [ letter8, setLetter8 ] = useState("");
-	const [ letter9, setLetter9 ] = useState("");
-	const [ letter10, setLetter10 ] = useState("");
-	const [ letter11, setLetter11 ] = useState("");
-	const [ letter12, setLetter12 ] = useState("");
-	const [ letter13, setLetter13 ] = useState("");
-	const [ letter14, setLetter14 ] = useState("");
-	const [ letter15, setLetter15 ] = useState("");
-	const [ letter16, setLetter16 ] = useState("");
-	const [ letter17, setLetter17 ] = useState("");
-	const [ letter18, setLetter18 ] = useState("");
-	const [ letter19, setLetter19 ] = useState("");
-	const [ letter20, setLetter20 ] = useState("");
-	const [ letter21, setLetter21 ] = useState("");
-	const [ letter22, setLetter22 ] = useState("");
-	const [ letter23, setLetter23 ] = useState("");
-	const [ letter24, setLetter24 ] = useState("");
-	const [ letter25, setLetter25 ] = useState("");
+	const [ letter1, setLetter1 ] = useState<string>("");
+	const [ letter2, setLetter2 ] = useState<string>("");
+	const [ letter3, setLetter3 ] = useState<string>("");
+	const [ letter4, setLetter4 ] = useState<string>("");
+	const [ letter5, setLetter5 ] = useState<string>("");
+	const [ letter6, setLetter6 ] = useState<string>("");
+	const [ letter7, setLetter7 ] = useState<string>("");
+	const [ letter8, setLetter8 ] = useState<string>("");
+	const [ letter9, setLetter9 ] = useState<string>("");
+	const [ letter10, setLetter10 ] = useState<string>("");
+	const [ letter11, setLetter11 ] = useState<string>("");
+	const [ letter12, setLetter12 ] = useState<string>("");
+	const [ letter13, setLetter13 ] = useState<string>("");
+	const [ letter14, setLetter14 ] = useState<string>("");
+	const [ letter15, setLetter15 ] = useState<string>("");
+	const [ letter16, setLetter16 ] = useState<string>("");
+	const [ letter17, setLetter17 ] = useState<string>("");
+	const [ letter18, setLetter18 ] = useState<string>("");
+	const [ letter19, setLetter19 ] = useState<string>("");
+	const [ letter20, setLetter20 ] = useState<string>("");
+	const [ letter21, setLetter21 ] = useState<string>("");
+	const [ letter22, setLetter22 ] = useState<string>("");
+	const [ letter23, setLetter23 ] = useState<string>("");
+	const [ letter24, setLetter24 ] = useState<string>("");
+	const [ letter25, setLetter25 ] = useState<string>("");
 
 	return (
 

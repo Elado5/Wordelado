@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Game from './components/Game';
+import Keyboard from './components/Keyboard';
 import './App.scss';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className="App">
       <Navbar/>
       <Game/>
+      <Keyboard/>
     </div>
   );
 }

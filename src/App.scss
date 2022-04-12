@@ -1,5 +1,6 @@
 * {
 	background-color: rgb(20, 20, 20);
+	direction: rtl;
 }
 
 .App {
@@ -31,14 +32,14 @@
 	}
 }
 
-.game{
-  align-self: center;
-  display: flex;
+.game {
+	align-self: center;
+	display: flex;
 	flex-direction: column;
 	align-self: center;
 	align-content: center;
 	justify-content: space-around;
-  margin-top: 13vh;
+	margin-top: 13vh;
 	width: 50%;
 	height: 50vh;
 }
@@ -50,7 +51,7 @@
 	align-self: center;
 	align-content: center;
 	justify-content: space-around;
-  margin-top: 13vh;
+	margin-top: 4vh;
 	width: 50%;
 	height: 50vh;
 
@@ -60,12 +61,52 @@
 		justify-content: center;
 
 		.text-cube {
-      border: solid gray 2px;
-      border-radius: 0.3rem;
-      color: white;
+			border: solid gray 2px;
+			border-radius: 0.3rem;
+			color: white;
+			width: 7vh;
+			height: 7vh;
+			margin: 0.3rem;
+		}
+	}
+}
+
+.letter-cube-grid {
+	color: white;
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	align-content: center;
+	justify-content: flex-start;
+	margin-top: 3vh;
+	width: 70%;
+	height: 40vh;
+
+	.letter-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		.letter-cube {
+      cursor: pointer;
+			display: flex;
+			border: solid gray 2px;
+			border-radius: 0.3rem;
+      background-color: rgb(187, 186, 186);
+			color: white;
+			width: 5vh;
+			height: 5vh;
+			margin-right: 0.5rem;
+			justify-content: center;
+      align-items: center;
+			text-align: center;
+      &:hover{
+        transition: ease-in-out 0.3s;
+        background-color: rgb(170, 170, 170);
+      }
+		}
+    .enter, .backspace {
       width: 7vh;
-      height: 7vh;
-      margin: 0.5rem;
     }
 	}
 }
