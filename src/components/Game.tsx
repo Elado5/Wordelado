@@ -5,7 +5,9 @@ import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 const Game = () => {
 	const alphabet: string[] = ["פ","ם","ן","ו","ט","א","ר","ק","ף","ך","ל","ח","י","ע","כ","ג","ד","ש","ץ","ת","צ","מ","נ","ה","ב","ס","ז"
 	];
-	const [ dailyWord, setDailyWord ] = useState<string>("מעולה"); //The daily chosen word.
+	const words: string[] = ["מעולה","קדמון","מעולף","אהובה","חמודה","ארמון","מגילה","מניפה","חשמלי","מתקדם","מערבי","מזרחי","מרוקו","ישראל","אנגליה","ברזיל","מכשיל","מאדים","מחילה","מנהרה","ארגמן","מתנדב","מעורב","מחושב","מחושל","משוחד","מתבקש","מתבלט","מקודש"
+	];
+	const [ dailyWord, setDailyWord ] = useState<string>(words[0]); //The daily chosen word.
 	const [ win, setWin ] = useState<boolean>(false); //Will change to 'true' when win condition is fulfilled.
 	const [ currentRow, setCurrentRow ] = useState<number>(1); //The current row which letters are being added to.
 	const [ currentIndex, setCurrentIndex ] = useState<number>(0); //The current index in the word which letters are being added to.
@@ -20,6 +22,11 @@ const Game = () => {
 	const [ yellowCubes, setYellowCubes ] = useState<string[]>([]); // Array that stores the IDs of cubes that contain semi-correct guesses.
 	const [ greenCubes, setGreenCubes ] = useState<string[]>([]); // Array that stores the IDs of cubes that contain fully correct guesses.
 	const [ toReveal, setToReveal ] = useState<string[]>([]); //Array that stores the IDs of cubes that contain any guess, for styling purposes.
+	const [ greyLetters, setGreyLetters ] = useState<string[]>([]);
+	//Function to get how many times the same substring appears in a string, in our case - character in a word.
+	const getOccurrence = (value: string, word: string) => {
+		return word.split(value).length - 1;
+	};
 
 	//What happens when you click a letter on the virtual keyboard.
 	const letterPress = (letter: string) => {
@@ -92,52 +99,104 @@ const Game = () => {
 			const greenLoad: string[] = greenCubes.slice();
 			const yellowLoad: string[] = yellowCubes.slice();
 			const revealLoad: string[] = toReveal.slice();
+			const greyLoad: string[] = greyLetters.slice();
+			let markedLetters: string[] = [];
 			if (currentRow === 1) {
 				for (let index = 0; index < row1.length; index++) {
+					let occurences: number = getOccurrence(row1[index], dailyWord);
+					let markedTimes: number = getOccurrence(row1[index], markedLetters.toString());
 					if (dailyWord[index] === row1[index]) {
+						markedLetters.push(row1[index]);
 						greenLoad.push(`key${index}`);
-					} else if (dailyWord.includes(row1[index])) {
+					} else if (
+						dailyWord.includes(row1[index]) &&
+						((occurences > 1 && occurences > markedTimes) ||
+							(occurences === 1 && !markedLetters.includes(row1[index])))
+					) {
+						markedLetters.push(row1[index]);
 						yellowLoad.push(`key${index}`);
+					} else if (!greenCubes.includes(row1[index]) && !yellowCubes.includes(row1[index])) {
+						greyLoad.push(row1[index]);
 					}
 					revealLoad.push(`key${index}`);
 				}
 			}
 			if (currentRow === 2) {
 				for (let index = 0; index < row2.length; index++) {
+					let occurences: number = getOccurrence(row2[index], dailyWord);
+					let markedTimes: number = getOccurrence(row2[index], markedLetters.toString());
 					if (dailyWord[index] === row2[index]) {
+						markedLetters.push(row2[index]);
 						greenLoad.push(`key${index + 5}`);
-					} else if (dailyWord.includes(row2[index])) {
+					} else if (
+						dailyWord.includes(row2[index]) &&
+						((occurences > 1 && occurences > markedTimes) ||
+							(occurences === 1 && !markedLetters.includes(row2[index])))
+					) {
+						markedLetters.push(row2[index]);
 						yellowLoad.push(`key${index + 5}`);
+					} else if (!greenCubes.includes(row2[index]) && !yellowCubes.includes(row2[index])) {
+						greyLoad.push(row2[index]);
 					}
 					revealLoad.push(`key${index + 5}`);
 				}
 			}
 			if (currentRow === 3) {
 				for (let index = 0; index < row3.length; index++) {
+					let occurences: number = getOccurrence(row3[index], dailyWord);
+					let markedTimes: number = getOccurrence(row3[index], markedLetters.toString());
 					if (dailyWord[index] === row3[index]) {
+						markedLetters.push(row3[index]);
 						greenLoad.push(`key${index + 10}`);
-					} else if (dailyWord.includes(row3[index])) {
+					} else if (
+						dailyWord.includes(row3[index]) &&
+						((occurences > 1 && occurences > markedTimes) ||
+							(occurences === 1 && !markedLetters.includes(row3[index])))
+					) {
+						markedLetters.push(row3[index]);
 						yellowLoad.push(`key${index + 10}`);
+					} else if (!greenCubes.includes(row3[index]) && !yellowCubes.includes(row3[index])) {
+						greyLoad.push(row3[index]);
 					}
 					revealLoad.push(`key${index + 10}`);
 				}
 			}
 			if (currentRow === 4) {
 				for (let index = 0; index < row4.length; index++) {
+					let occurences: number = getOccurrence(row4[index], dailyWord);
+					let markedTimes: number = getOccurrence(row4[index], markedLetters.toString());
 					if (dailyWord[index] === row4[index]) {
+						markedLetters.push(row4[index]);
 						greenLoad.push(`key${index + 15}`);
-					} else if (dailyWord.includes(row4[index])) {
+					} else if (
+						dailyWord.includes(row4[index]) &&
+						((occurences > 1 && occurences > markedTimes) ||
+							(occurences === 1 && !markedLetters.includes(row4[index])))
+					) {
+						markedLetters.push(row4[index]);
 						yellowLoad.push(`key${index + 15}`);
+					} else if (!greenCubes.includes(row4[index]) && !yellowCubes.includes(row4[index])) {
+						greyLoad.push(row4[index]);
 					}
 					revealLoad.push(`key${index + 15}`);
 				}
 			}
 			if (currentRow === 5) {
 				for (let index = 0; index < row5.length; index++) {
+					let occurences: number = getOccurrence(row5[index], dailyWord);
+					let markedTimes: number = getOccurrence(row5[index], markedLetters.toString());
 					if (dailyWord[index] === row5[index]) {
+						markedLetters.push(row5[index]);
 						greenLoad.push(`key${index + 20}`);
-					} else if (dailyWord.includes(row5[index])) {
+					} else if (
+						dailyWord.includes(row5[index]) &&
+						((occurences > 1 && occurences > markedTimes) ||
+							(occurences === 1 && !markedLetters.includes(row5[index])))
+					) {
+						markedLetters.push(row5[index]);
 						yellowLoad.push(`key${index + 20}`);
+					} else if (!greenCubes.includes(row5[index]) && !yellowCubes.includes(row5[index])) {
+						greyLoad.push(row4[index]);
 					}
 					revealLoad.push(`key${index + 20}`);
 				}
@@ -145,6 +204,10 @@ const Game = () => {
 			setGreenCubes(greenLoad);
 			setYellowCubes(yellowLoad);
 			setToReveal(revealLoad);
+			greyLetters.forEach((item) => {
+				greyLoad.push(item);
+			});
+			setGreyLetters(greyLoad);
 			setCurrentRow(currentRow + 1);
 			setCurrentIndex(0);
 			checkWin(greenLoad);
@@ -284,25 +347,31 @@ const Game = () => {
 
 			<div className="letter-cube-grid">
 				<div className="letter-row">
-					<p className="letter-cube backspace">
-						<FontAwesomeIcon onClick={() => backspacePress()} icon={faBackspace} />
+					<p className="letter-cube backspace" onClick={() => backspacePress()}>
+						<FontAwesomeIcon icon={faBackspace} />
 					</p>
 					{alphabet.slice(0, 8).map((value, key) => (
-						<p className="letter-cube" onClick={() => letterPress(value)}>
+						<p
+							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}`}
+							onClick={() => letterPress(value)}>
 							{value}
 						</p>
 					))}
 				</div>
 				<div className="letter-row">
 					{alphabet.slice(8, 18).map((value, key) => (
-						<p className="letter-cube" onClick={() => letterPress(value)}>
+						<p
+							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}`}
+							onClick={() => letterPress(value)}>
 							{value}
 						</p>
 					))}
 				</div>
 				<div className="letter-row">
 					{alphabet.slice(18).map((value, key) => (
-						<p className="letter-cube" onClick={() => letterPress(value)}>
+						<p
+							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}`}
+							onClick={() => letterPress(value)}>
 							{value}
 						</p>
 					))}
