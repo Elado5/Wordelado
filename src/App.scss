@@ -82,7 +82,7 @@ $wordleYellow: #b59f3b;
 			background-color: $wordleGreen !important;
 		}
 		.yellow-cube {
-			background-color: $wordleYellow;
+			background-color: $wordleYellow !important;
 		}
 	}
 }
@@ -110,8 +110,8 @@ $wordleYellow: #b59f3b;
 			border-radius: 0.3rem;
 			background-color: rgb(150, 150, 150);
 			color: white;
-			width: 50px !important;
-			height: 50px !important;
+			width: 50px;
+			height: 50px;
 			margin-right: 0.3rem;
 			justify-content: center;
 			align-items: center;
@@ -136,9 +136,12 @@ $wordleYellow: #b59f3b;
 
 .revealing {
 	border: solid lightgray 2px !important;
-    --reveal: 0.5s;
-    --reveal-half: calc(var(--reveal)*0.5);
-    --reveal-offset: calc(var(--reveal)*0.6);
-    -webkit-animation: reveal var(--reveal) ease-in-out;
-    animation: reveal var(--reveal) ease-in-out;
+	background-color: #3a3a3c;
+    animation: flipInX; /* referring directly to the animation's @keyframe declaration */
+  	animation-duration: 1s;
+}
+
+.win-animation {
+	animation: pulse;
+	animation-duration: 1s;
 }
