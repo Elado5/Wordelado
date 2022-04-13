@@ -114,7 +114,7 @@ const Game = () => {
 					} else if (dailyWord.includes(row2[index])) {
 						yellowLoad.push(`key${index + 5}`);
 					}
-					revealLoad.push(`key${index + 5}`)
+					revealLoad.push(`key${(index + 5)}`)
 				}
 
 			}
@@ -156,11 +156,34 @@ const Game = () => {
 			setToReveal(revealLoad);
 			setCurrentRow(currentRow + 1);
 			setCurrentIndex(0);
+			checkWin(greenLoad);
+			console.log('greenCubes', greenCubes)
 		}
-		console.log("yellowCubes", yellowCubes);
-		console.log("greenCubes", greenCubes);
 		return;
 	};
+
+	const checkWin = (arr :string[]) => {
+		if (arr.includes("key0") && arr.includes("key1") && arr.includes("key2") && arr.includes("key3") && arr.includes("key4")){
+			alert("ניסיון אחד? מדהים!");
+			setCurrentRow(6);
+		} 
+		else if (arr.includes("key5") && arr.includes("key6") && arr.includes("key7") && arr.includes("key8") && arr.includes("key9")){
+			alert("שני נסיונות? עבודה מעולה!");
+			setCurrentRow(6);
+		}
+		else if (arr.includes("key10") && arr.includes("key11") && arr.includes("key12") && arr.includes("key13") && arr.includes("key14")){
+			alert("שלושה נסיונות, מרשים!");
+			setCurrentRow(6);
+		}
+		else if (arr.includes("key15") && arr.includes("key16") && arr.includes("key17") && arr.includes("key18") && arr.includes("key19")){
+			alert("כל הכבוד!");
+			setCurrentRow(6);
+		}
+		else if (arr.includes("key20") && arr.includes("key21") && arr.includes("key22") && arr.includes("key23") && arr.includes("key24")){
+			alert("זה היה קרוב, כל הכבוד!");
+			setCurrentRow(6);
+		}
+	}
 
 	return (
 		<div className="game">
@@ -181,7 +204,7 @@ const Game = () => {
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 5))
 								? "yellow-cube"
-								: ""} ${greenCubes.includes("key" + (key + 5)) ? "green-cube" : ""}`}
+								: ""} ${greenCubes.includes("key" + (key + 5)) ? "green-cube" : ""} ${toReveal.includes("key" + (key + 5)) ? "revealing" : ""}`}
 							id={"key" + (key + 5)}>
 							{value}
 						</p>
@@ -192,7 +215,7 @@ const Game = () => {
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 10))
 								? "yellow-cube"
-								: ""} ${greenCubes.includes("key" + (key + 10)) ? "green-cube" : ""}`}
+								: ""} ${greenCubes.includes("key" + (key + 10)) ? "green-cube" : ""} ${toReveal.includes("key" + (key + 10)) ? "revealing" : ""}`}
 							id={"key" + (key + 10)}>
 							{value}
 						</p>
@@ -203,7 +226,7 @@ const Game = () => {
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 15))
 								? "yellow-cube"
-								: ""} ${greenCubes.includes("key" + (key + 15)) ? "green-cube" : ""}`}
+								: ""} ${greenCubes.includes("key" + (key + 15)) ? "green-cube" : ""} ${toReveal.includes("key" + (key + 15)) ? "revealing" : ""}`}
 							id={"key" + (key + 15)}>
 							{value}
 						</p>
@@ -214,7 +237,7 @@ const Game = () => {
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 20))
 								? "yellow-cube"
-								: ""} ${greenCubes.includes("key" + (key + 20)) ? "green-cube" : ""}`}
+								: ""} ${greenCubes.includes("key" + (key + 20)) ? "green-cube" : ""} ${toReveal.includes("key" + (key + 20)) ? "revealing" : ""}`}
 							id={"key" + (key + 20)}>
 							{value}
 						</p>

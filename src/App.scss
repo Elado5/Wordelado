@@ -1,8 +1,9 @@
-$wordleGreen: rgb(37, 175, 37);
-$wordleYellow: rgb(255, 230, 0);
+$wordleGreen: #538d4e;
+$wordleYellow: #b59f3b;
 
 * {
 	direction: rtl;
+	font-family: 'Rubik';
 }
 
 .App {
@@ -32,7 +33,7 @@ $wordleYellow: rgb(255, 230, 0);
 		align-items: center;
 		font-size: 1.3rem;
 		.title-half {
-			color: rgb(174, 179, 174);
+			color: rgb(183, 177, 158);
 		}
 		.title-half2 {
 			color: rgb(167, 197, 174);
@@ -119,11 +120,6 @@ $wordleYellow: rgb(255, 230, 0);
 				transition: ease-in-out 0.3s;
 				background-color: rgb(170, 170, 170);
 			}
-			&:active {
-				-webkit-animation: zoom .2s;
-				animation: zoom .2s;
-				border: solid lightgray 3px;
-			}
 		}
 		.enter,
 		.backspace {
@@ -139,6 +135,7 @@ $wordleYellow: rgb(255, 230, 0);
 }
 
 .revealing {
+	border: solid lightgray 2px !important;
     --reveal: 0.5s;
     --reveal-half: calc(var(--reveal)*0.5);
     --reveal-offset: calc(var(--reveal)*0.6);
