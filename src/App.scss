@@ -25,6 +25,10 @@ $wordleYellow: #b59f3b;
 	color: white;
 	height: 4rem;
 	border-bottom: solid 1px rgb(200, 200, 200);
+
+	@media screen and (max-height: 720px) {
+		height: 2rem;
+	}
 	.title {
 		display: flex;
 		flex-direction: row;
@@ -45,6 +49,16 @@ $wordleYellow: #b59f3b;
 	}
 }
 
+.green-cube {
+	background-color: $wordleGreen !important;
+	transition: ease-in-out 0.5;
+}
+.yellow-cube {
+	background-color: $wordleYellow !important;
+	transition: ease-in-out 0.5;
+}
+
+
 .game {
 	align-self: center;
 	display: flex;
@@ -53,12 +67,16 @@ $wordleYellow: #b59f3b;
 	align-content: center;
 	justify-content: space-around;
 	margin-top: 13vh;
-	width: 50%;
+	width: 100%;
 	height: 50vh;
 }
 
 .cube-grid {
-	margin-top: 4vh;
+	z-index: 4;
+	margin-top: 7vh;
+	@media screen and (max-height: 720px) {
+		margin-top: 15vh;
+	}
 	.cube-row {
 		display: flex;
 		flex-direction: row;
@@ -69,20 +87,13 @@ $wordleYellow: #b59f3b;
 			border: solid gray 2px;
 			border-radius: 0.3rem;
 			color: white;
-			width: 7vh;
-			height: 7vh;
+			width: 5.5vh;
+			height: 5.5vh;
 			margin: 0.3rem;
 			font-size: 2.5rem;
 			text-align: center;
 			justify-content: center;
 			align-items: center;
-		}
-
-		.green-cube {
-			background-color: $wordleGreen !important;
-		}
-		.yellow-cube {
-			background-color: $wordleYellow !important;
 		}
 	}
 }
@@ -95,9 +106,12 @@ $wordleYellow: #b59f3b;
 	align-content: center;
 	justify-content: flex-start;
 	margin-top: 2vh;
-	width: 70%;
+	width: 100%;
 	height: 40vh;
-
+	.green-cube {
+		background-color: $wordleGreen !important; //written here again to override the yellow cube's 'important'
+		transition: ease-in-out 0.5;
+	}
 	.letter-row {
 		display: flex;
 		flex-direction: row;
@@ -110,8 +124,8 @@ $wordleYellow: #b59f3b;
 			border-radius: 0.3rem;
 			background-color: rgb(150, 150, 150);
 			color: white;
-			width: 50px;
-			height: 50px;
+			width: 3rem;
+			height: 3rem;
 			margin-right: 0.3rem;
 			justify-content: center;
 			align-items: center;
@@ -149,4 +163,19 @@ $wordleYellow: #b59f3b;
 .win-animation {
 	animation: pulse;
 	animation-duration: 1s;
+}
+
+.Float{
+	z-index: 5;
+	color: white;
+	display:flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: rgba(25, 25, 25, 0.7);
+	width: 100%;
+	height: 100vh;
+}
+
+.hidden{
+	display: none;
 }
