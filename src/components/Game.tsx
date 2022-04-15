@@ -6,14 +6,11 @@ const Game = () => {
 	const alphabet: string[] = [
 		"פ",
 		"ם",
-		"ן",
 		"ו",
 		"ט",
 		"א",
 		"ר",
 		"ק",
-		"ף",
-		"ך",
 		"ל",
 		"ח",
 		"י",
@@ -22,7 +19,6 @@ const Game = () => {
 		"ג",
 		"ד",
 		"ש",
-		"ץ",
 		"ת",
 		"צ",
 		"מ",
@@ -34,15 +30,15 @@ const Game = () => {
 	];
 	const words: string[] = [
 		"מעולה",
-		"קדמון",
-		"מעולף",
+		"קדמונ",
+		"מעולפ",
 		"אהובה",
 		"חמודה",
 		"ארמון",
 		"מגילה",
 		"מניפה",
 		"חשמלי",
-		"מתקדם",
+		"מתקדמ",
 		"מערבי",
 		"מזרחי",
 		"מרוקו",
@@ -50,7 +46,7 @@ const Game = () => {
 		"אנגליה",
 		"ברזיל",
 		"מכשיל",
-		"מאדים",
+		"מאדימ",
 		"מחילה",
 		"מנהרה",
 		"ארגמן",
@@ -64,7 +60,7 @@ const Game = () => {
 		"מקודש",
 		"טיפקס",
 		"מגניב",
-		"מקסים",
+		"מקסימ",
 		"ברווז",
 		"מוצלח",
 		""
@@ -173,6 +169,64 @@ const Game = () => {
 		}
 	};
 
+	// const returnParallelLetter = (character: string) => {
+	// 	if(character === "מ") {
+	// 		return "ם";
+	// 	}
+	// 	else if(character === "נ"){
+	// 		return "ן";
+	// 	}
+	// 	else if(character === "פ"){
+	// 		return "ף";
+	// 	}
+	// 	else if(character === "צ"){
+	// 		return "ץ";
+	// 	}
+	// 	else if(character === "ם"){
+	// 		return "מ";
+	// 	}
+	// 	else if(character === "ן"){
+	// 		return "נ";
+	// 	}
+	// 	else if(character === "ף"){
+	// 		return "פ";
+	// 	}
+	// 	else if(character === "ץ"){
+	// 		return "צ";
+	// 	}
+	// 	else{
+	// 		return "";
+	// 	}
+	// }
+
+	// const pushParallelLetter = (arr: string[]) => {
+	// 	if (arr.includes("נ") && !arr.includes("ן")) {
+	// 		arr.push("ן");
+	// 	}
+	// 	if (arr.includes("מ") && !arr.includes("ם")) {
+	// 		arr.push("ם");
+	// 	}
+	// 	if (arr.includes("צ") && !arr.includes("ץ")) {
+	// 		arr.push("ץ");
+	// 	}
+	// 	if (arr.includes("פ") && !arr.includes("ף")) {
+	// 		arr.push("ף");
+	// 	}
+	// 	if (arr.includes("ן") && !arr.includes("נ")) {
+	// 		arr.push("נ");
+	// 	}
+	// 	if (arr.includes("ם") && !arr.includes("מ")) {
+	// 		arr.push("מ");
+	// 	}
+	// 	if (arr.includes("ץ") && !arr.includes("צ")) {
+	// 		arr.push("צ");
+	// 	}
+	// 	if (arr.includes("ף") && !arr.includes("פ")) {
+	// 		arr.push("פ");
+	// 	}
+	// 	return;
+	// };
+
 	// function that "uses up" a guess if the word exists in the word bank, and then displays if any letter matches or exists in the daily word.
 	const sendGuess = async () => {
 		if (currentIndex === 5) {
@@ -191,7 +245,13 @@ const Game = () => {
 						markedLetters.push(row1[index]);
 						greenLoad.push(`key${index}`);
 						greenLettersLoad.push(row1[index]);
-					} else if (
+					}
+					// else if ( dailyWord[index] === returnParallelLetter(row1[index])){
+					// 	markedLetters.push(returnParallelLetter(row1[index]));
+					// 	greenLoad.push(`key${index}`);
+					// 	greenLettersLoad.push(returnParallelLetter(row1[index]));
+					// }
+					else if (
 						dailyWord.includes(row1[index]) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row1[index])))
@@ -199,7 +259,18 @@ const Game = () => {
 						markedLetters.push(row1[index]);
 						yellowLoad.push(`key${index}`);
 						yellowLettersLoad.push(row1[index]);
-					} else if (!greenCubes.includes(row1[index]) && !yellowCubes.includes(row1[index])) {
+					}
+					// else if (
+					// 	dailyWord.includes(returnParallelLetter(row1[index])) &&
+					// 	((occurences > 1 && occurences > markedTimes) ||
+					// 		(occurences === 1 && !markedLetters.includes(returnParallelLetter(row1[index]))))
+					// ) {
+					// 	markedLetters.push(returnParallelLetter(row1[index]));
+					// 	yellowLoad.push(`key${index}`);
+					// 	yellowLettersLoad.push(returnParallelLetter(row1[index]));
+					// }
+					
+					else if (!greenCubes.includes(row1[index]) && !yellowCubes.includes(row1[index])) {
 						greyLettersLoad.push(row1[index]);
 					}
 					revealLoad.push(`key${index}`);
@@ -213,7 +284,7 @@ const Game = () => {
 						greenLoad.push(`key${index + 5}`);
 						greenLettersLoad.push(row2[index]);
 					} else if (
-						dailyWord.includes(row2[index]) &&
+						(dailyWord.includes(row2[index])) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row2[index])))
 					) {
@@ -310,6 +381,10 @@ const Game = () => {
 					revealLoad.push(`key${index + 25}`);
 				}
 			}
+			// pushParallelLetter(greenLettersLoad);
+			// pushParallelLetter(yellowLettersLoad);
+			// pushParallelLetter(greyLettersLoad);
+			console.log('yellowLettersLoad', yellowLettersLoad);
 			setGreenCubes(greenLoad);
 			setYellowCubes(yellowLoad);
 			setToReveal(revealLoad);
@@ -322,6 +397,7 @@ const Game = () => {
 			yellowLetters.forEach((item) => {
 				yellowLettersLoad.push(item);
 			});
+
 			setGreyLetters(greyLettersLoad);
 			setGreenLetters(greenLettersLoad);
 			setYellowLetters(yellowLettersLoad);
@@ -394,9 +470,8 @@ const Game = () => {
 			alert("זה היה ממש קרוב, כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
-		}
-		else if (currentRow === 6) {
-			alert(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`)
+		} else if (currentRow === 6) {
+			alert(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`);
 		}
 	};
 
@@ -492,7 +567,7 @@ const Game = () => {
 					<p className="letter-cube backspace" onClick={() => backspacePress()}>
 						<FontAwesomeIcon icon={faBackspace} />
 					</p>
-					{alphabet.slice(0, 8).map((value, key) => (
+					{alphabet.slice(0, 7).map((value, key) => (
 						<p
 							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
 							 ${greenLetters.includes(value) ? "green-cube" : ""}
@@ -503,7 +578,7 @@ const Game = () => {
 					))}
 				</div>
 				<div className="letter-row">
-					{alphabet.slice(8, 18).map((value, key) => (
+					{alphabet.slice(7, 16).map((value, key) => (
 						<p
 							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
 							${greenLetters.includes(value) ? "green-cube" : ""}
@@ -514,15 +589,16 @@ const Game = () => {
 					))}
 				</div>
 				<div className="letter-row">
-					{alphabet.slice(18).map((value, key) => (
-						<p
-							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
+					{alphabet.slice(16).map(
+						(value, key) =>
+								<p
+									className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
 							${greenLetters.includes(value) ? "green-cube" : ""}
 							${yellowLetters.includes(value) ? "yellow-cube" : ""}`}
-							onClick={() => letterPress(value)}>
-							{value}
-						</p>
-					))}
+									onClick={() => letterPress(value)}>
+									{value}
+								</p>
+					)}
 
 					<p className="letter-cube enter" onClick={(e) => sendGuess()}>
 						Enter

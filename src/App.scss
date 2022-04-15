@@ -134,17 +134,17 @@ $wordleYellow: #b59f3b;
 				transition: ease-in-out 0.3s;
 				background-color: rgb(170, 170, 170);
 			}
+
 		}
 		.enter,
 		.backspace {
 			width: 7vh;
 		}
+		.blacken{
+			background-color: rgb(70, 70, 70);
+			transition: ease-in-out 0.5s;
+		}
 	}
-}
-
-.blacken{
-	background-color: rgb(70, 70, 70) !important;
-	transition: ease-in-out 0.5s;
 }
 
 .zoom {
