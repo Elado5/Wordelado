@@ -61,9 +61,20 @@ const Game = () => {
 		"משוחד",
 		"מתבקש",
 		"מתבלט",
-		"מקודש"
+		"מקודש",
+		"טיפקס",
+		"מגניב",
+		"מקסים",
+		"ברווז",
+		"מוצלח",
+		""
 	];
-	const [ dailyWord, setDailyWord ] = useState<string>("חויוק"); //The daily chosen word.
+
+	let date = new Date();
+	let day = date.getDay();
+	let month = date.getMonth();
+
+	const [ dailyWord, setDailyWord ] = useState<string>(words[day]); //The daily chosen word.
 	const [ win, setWin ] = useState<boolean>(false); //Will change to 'true' when win condition is fulfilled.
 	const [ currentRow, setCurrentRow ] = useState<number>(1); //The current row which letters are being added to.
 	const [ currentIndex, setCurrentIndex ] = useState<number>(0); //The current index in the word which letters are being added to.
