@@ -5,7 +5,6 @@ import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 const Game = () => {
 	const alphabet: string[] = [
 		"פ",
-		"ם",
 		"ו",
 		"ט",
 		"א",
@@ -34,7 +33,7 @@ const Game = () => {
 		"מעולפ",
 		"אהובה",
 		"חמודה",
-		"ארמון",
+		"ארמונ",
 		"מגילה",
 		"מניפה",
 		"חשמלי",
