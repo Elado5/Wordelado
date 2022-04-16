@@ -179,3 +179,13 @@ $wordleYellow: #b59f3b;
 .hidden{
 	display: none;
 }
+
+.result-button{
+    align-self: center;
+    width: 15%;
+    height: 26px;
+    z-index: 5;
+    background-color: $wordleGreen;
+    bottom: 42vh;
+    position: absolute;
+}

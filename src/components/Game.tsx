@@ -69,6 +69,13 @@ const Game = () => {
 	let day = date.getDay();
 	let month = date.getMonth();
 
+	// Calculate days since Dec 1st 2012
+var initialDate = new Date("04/15/2022"); // Attention: month is zero-based
+var now = Date.now();
+var difference = now - initialDate.getTime();
+var millisecondsPerDay = 24 * 60 * 60 * 1000;
+var daysSince = Math.floor(difference / millisecondsPerDay);
+
 	const [ dailyWord, setDailyWord ] = useState<string>(words[day]); //The daily chosen word.
 	const [ win, setWin ] = useState<boolean>(false); //Will change to 'true' when win condition is fulfilled.
 	const [ currentRow, setCurrentRow ] = useState<number>(1); //The current row which letters are being added to.
@@ -88,10 +95,36 @@ const Game = () => {
 	const [ greyLetters, setGreyLetters ] = useState<string[]>([]);
 	const [ yellowLetters, setYellowLetters ] = useState<string[]>([]);
 	const [ greenLetters, setGreenLetters ] = useState<string[]>([]);
+
+	const [winRow, setWinRow] = useState<number>();
 	//Function to get how many times the same substring appears in a string, in our case - character in a word.
 	const getOccurrence = (value: string, word: string) => {
 		return word.split(value).length - 1;
 	};
+
+	const visualizeResult = () => {
+
+		let result: string = `וורדאלעדו ${daysSince}\nנסיון ${winRow} מתוך 6\n`;
+
+		for (let index = 0; index < 30; index++) {
+			if(document.getElementById(`key${index}`)?.innerText !== ""){
+				if(greenCubes.includes(`key${index}`)){
+					result +="🟩";
+				}
+				else if(yellowCubes.includes(`key${index}`)){
+					result +="🟨";
+				}
+				else{
+					result +="⬛";
+				}
+				if((index+1) % 5 === 0){
+					result +="\n"
+				}
+			}
+		}
+
+		return(result);
+	}
 
 	//What happens when you click a letter on the virtual keyboard.
 	const letterPress = (letter: string) => {
@@ -166,6 +199,7 @@ const Game = () => {
 				setCurrentIndex(currentIndex - 1);
 			}
 		}
+		visualizeResult();
 	};
 
 	// const returnParallelLetter = (character: string) => {
@@ -418,6 +452,7 @@ const Game = () => {
 		) {
 			setWin(true);
 			alert("ניסיון אחד? מדהים!");
+			setWinRow(1);
 			setCurrentRow(8);
 		} else if (
 			arr.includes("key5") &&
@@ -429,6 +464,7 @@ const Game = () => {
 			alert("שני נסיונות? עבודה מעולה!");
 			setCurrentRow(8);
 			setWin(true);
+			setWinRow(2);
 		} else if (
 			arr.includes("key10") &&
 			arr.includes("key11") &&
@@ -439,6 +475,8 @@ const Game = () => {
 			alert("שלושה נסיונות, מרשים!");
 			setCurrentRow(8);
 			setWin(true);
+			setWinRow(3);
+
 		} else if (
 			arr.includes("key15") &&
 			arr.includes("key16") &&
@@ -449,6 +487,8 @@ const Game = () => {
 			alert("כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
+			setWinRow(4);
+
 		} else if (
 			arr.includes("key20") &&
 			arr.includes("key21") &&
@@ -459,6 +499,8 @@ const Game = () => {
 			alert("זה היה דיי קרוב, כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
+			setWinRow(5);
+
 		} else if (
 			arr.includes("key25") &&
 			arr.includes("key26") &&
@@ -469,6 +511,8 @@ const Game = () => {
 			alert("זה היה ממש קרוב, כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
+			setWinRow(6);
+
 		} else if (currentRow === 6) {
 			alert(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`);
 		}
@@ -560,7 +604,7 @@ const Game = () => {
 					))}
 				</div>
 			</div>
-
+						<button className={`result-button ${winRow ? "" : "hidden"}`} onClick={() => navigator.clipboard.writeText(visualizeResult())}>העתק תוצאה</button>
 			<div className="letter-cube-grid">
 				<div className="letter-row">
 					<p className="letter-cube backspace" onClick={() => backspacePress()}>
