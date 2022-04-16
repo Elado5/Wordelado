@@ -106,7 +106,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 
 		let result: string = `וורדאלעדו ${daysSince}\nנסיון ${winRow} מתוך 6\n`;
 
-		for (let index = 0; index < 30; index++) {
+		for (let index = 4; index >= 0; index--) {
 			if(document.getElementById(`key${index}`)?.innerText !== ""){
 				if(greenCubes.includes(`key${index}`)){
 					result +="🟩";
@@ -117,12 +117,91 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 				else{
 					result +="⬛";
 				}
-				if((index+1) % 5 === 0){
+				if(index=== 0){
 					result +="\n"
 				}
 			}
 		}
-
+		for (let index = 9; index >= 5; index--) {
+			if(document.getElementById(`key${index}`)?.innerText !== ""){
+				if(greenCubes.includes(`key${index}`)){
+					result +="🟩";
+				}
+				else if(yellowCubes.includes(`key${index}`)){
+					result +="🟨";
+				}
+				else{
+					result +="⬛";
+				}
+				if(index=== 5){
+					result +="\n"
+				}
+			}
+		}
+		for (let index = 14; index >= 10; index--) {
+			if(document.getElementById(`key${index}`)?.innerText !== ""){
+				if(greenCubes.includes(`key${index}`)){
+					result +="🟩";
+				}
+				else if(yellowCubes.includes(`key${index}`)){
+					result +="🟨";
+				}
+				else{
+					result +="⬛";
+				}
+				if(index=== 10){
+					result +="\n"
+				}
+			}
+		}
+		for (let index = 19; index >= 15; index--) {
+			if(document.getElementById(`key${index}`)?.innerText !== ""){
+				if(greenCubes.includes(`key${index}`)){
+					result +="🟩";
+				}
+				else if(yellowCubes.includes(`key${index}`)){
+					result +="🟨";
+				}
+				else{
+					result +="⬛";
+				}
+				if(index=== 15){
+					result +="\n"
+				}
+			}
+		}
+		for (let index = 24; index >= 20; index--) {
+			if(document.getElementById(`key${index}`)?.innerText !== ""){
+				if(greenCubes.includes(`key${index}`)){
+					result +="🟩";
+				}
+				else if(yellowCubes.includes(`key${index}`)){
+					result +="🟨";
+				}
+				else{
+					result +="⬛";
+				}
+				if(index=== 20){
+					result +="\n"
+				}
+			}
+		}
+		for (let index = 29; index >= 25; index--) {
+			if(document.getElementById(`key${index}`)?.innerText !== ""){
+				if(greenCubes.includes(`key${index}`)){
+					result +="🟩";
+				}
+				else if(yellowCubes.includes(`key${index}`)){
+					result +="🟨";
+				}
+				else{
+					result +="⬛";
+				}
+				if(index=== 25){
+					result +="\n"
+				}
+			}
+		}
 		return(result);
 	}
 
