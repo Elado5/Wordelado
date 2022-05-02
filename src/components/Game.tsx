@@ -372,7 +372,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			} else if (currentRow === 2) {
 				if(!Words_Filter.includes(row2.join("")) && !Words_Source.includes(row2.join(""))){
 					setTimeout(() => setBadTry2(true), 100);
-					setBadTry1(false)
+					setBadTry2(false)
 					return;
 				}
 
@@ -411,7 +411,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			} else if (currentRow === 3) {
 				if(!Words_Filter.includes(row3.join("")) && !Words_Source.includes(row3.join(""))){
 					setTimeout(() => setBadTry3(true), 100);
-					setBadTry1(false)
+					setBadTry3(false)
 					return;
 				}
 
@@ -450,7 +450,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			} else if (currentRow === 4) {
 				if(!Words_Filter.includes(row4.join("")) && !Words_Source.includes(row4.join(""))){
 					setTimeout(() => setBadTry4(true), 100);
-					setBadTry1(false)
+					setBadTry4(false)
 					return;
 				}
 
@@ -489,7 +489,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			} else if (currentRow === 5) {
 				if(!Words_Filter.includes(row5.join("")) && !Words_Source.includes(row5.join(""))){
 					setTimeout(() => setBadTry5(true), 100);
-					setBadTry1(false)
+					setBadTry5(false)
 					return;
 				}
 
@@ -528,7 +528,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			} else if (currentRow === 6) {
 				if(!Words_Filter.includes(row6.join("")) && !Words_Source.includes(row6.join(""))){
 					setTimeout(() => setBadTry6(true), 100);
-					setBadTry1(false)
+					setBadTry6(false)
 					return;
 				}
 
