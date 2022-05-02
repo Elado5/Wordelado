@@ -165,6 +165,11 @@ $wordleYellow: #b59f3b;
 	animation-duration: 1s;
 }
 
+.not-exist-animation{
+	animation: flash;
+	animation-duration: 0.75s;
+}
+
 .Float{
 	z-index: 5;
 	color: white;

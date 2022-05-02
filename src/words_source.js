@@ -1,5 +1,5 @@
 
-export const LEXICON=[
+export const Words_Source=[
   "הזמין",
   "עיגול",
   "אנזים",
@@ -17,7 +17,9 @@ export const LEXICON=[
   "נשיכה",
   "חידוש",
   "מכחול",
+  "ארגמן",
   "כישוף",
+  "פינוק",
   "בהחלט",
   "משמעת",
   "אתמול",

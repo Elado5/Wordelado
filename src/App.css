@@ -1,9 +1,10 @@
 * {
   direction: rtl;
+  font-family: 'Rubik';
 }
 
 .App {
-  background-color: #191919;
+  background-color: #1e1e1e;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,10 +32,16 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #1e1e1e;
+  background-color: #232323;
   color: white;
   height: 4rem;
   border-bottom: solid 1px #c8c8c8;
+}
+
+@media screen and (max-height: 720px) {
+  .navbar {
+    height: 2rem;
+  }
 }
 
 .navbar .title {
@@ -55,7 +62,7 @@
 }
 
 .navbar .title .title-half {
-  color: #aeb3ae;
+  color: #b7b19e;
 }
 
 .navbar .title .title-half2 {
@@ -64,6 +71,18 @@
 
 .navbar #icon {
   cursor: pointer;
+}
+
+.green-cube {
+  background-color: #538d4e !important;
+  -webkit-transition: ease-in-out 0.5;
+  transition: ease-in-out 0.5;
+}
+
+.yellow-cube {
+  background-color: #b59f3b !important;
+  -webkit-transition: ease-in-out 0.5;
+  transition: ease-in-out 0.5;
 }
 
 .game {
@@ -82,12 +101,19 @@
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin-top: 13vh;
-  width: 50%;
+  width: 100%;
   height: 50vh;
 }
 
 .cube-grid {
-  margin-top: 4vh;
+  z-index: 4;
+  margin-top: 7vh;
+}
+
+@media screen and (max-height: 720px) {
+  .cube-grid {
+    margin-top: 15vh;
+  }
 }
 
 .cube-grid .cube-row {
@@ -104,20 +130,23 @@
 }
 
 .cube-grid .cube-row .text-cube {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   border: solid gray 2px;
   border-radius: 0.3rem;
   color: white;
-  width: 7vh;
-  height: 7vh;
+  width: 5.5vh;
+  height: 5.5vh;
   margin: 0.3rem;
-}
-
-.cube-grid .cube-row .green-cube {
-  background-color: green;
-}
-
-.cube-grid .cube-row .yellow-cube {
-  background-color: #ffe600;
+  font-size: 2rem;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .letter-cube-grid {
@@ -136,9 +165,15 @@
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  margin-top: 3vh;
-  width: 70%;
+  margin-top: 2vh;
+  width: 100%;
   height: 40vh;
+}
+
+.letter-cube-grid .green-cube {
+  background-color: #538d4e !important;
+  -webkit-transition: ease-in-out 0.5;
+  transition: ease-in-out 0.5;
 }
 
 .letter-cube-grid .letter-row {
@@ -161,11 +196,11 @@
   display: flex;
   border: solid gray 2px;
   border-radius: 0.3rem;
-  background-color: #bbbaba;
+  background-color: #969696;
   color: white;
-  width: 5vh;
-  height: 5vh;
-  margin-right: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.3rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -181,7 +216,86 @@
   background-color: #aaaaaa;
 }
 
-.letter-cube-grid .letter-row .enter, .letter-cube-grid .letter-row .backspace {
+.letter-cube-grid .letter-row .enter,
+.letter-cube-grid .letter-row .backspace {
   width: 7vh;
+}
+
+.letter-cube-grid .letter-row .blacken {
+  background-color: #464646;
+  -webkit-transition: ease-in-out 0.5s;
+  transition: ease-in-out 0.5s;
+}
+
+.zoom {
+  -webkit-animation: zoom .2s;
+  animation: zoom .2s;
+  border: solid lightgray 3px;
+}
+
+.revealing {
+  border: solid lightgray 2px !important;
+  background-color: #3a3a3c;
+  -webkit-animation: flipInX;
+          animation: flipInX;
+  /* referring directly to the animation's @keyframe declaration */
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.win-animation {
+  -webkit-animation: pulse;
+          animation: pulse;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.not-exist-animation {
+  -webkit-animation: flash;
+          animation: flash;
+  -webkit-animation-duration: 0.75s;
+          animation-duration: 0.75s;
+}
+
+.Float {
+  z-index: 5;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(25, 25, 25, 0.7);
+  width: 100%;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+.result-button {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 15%;
+  height: 26px;
+  z-index: 5;
+  background-color: #538d4e;
+  bottom: 42vh;
+  position: absolute;
+  color: white;
+}
+
+@media screen and (max-height: 1079px) {
+  .result-button {
+    font-size: 0.6rem;
+    bottom: 42.5vh;
+  }
 }
 /*# sourceMappingURL=App.css.map */

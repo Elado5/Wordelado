@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace } from "@fortawesome/free-solid-svg-icons";
+import { Words_Filter } from "../words_filter";
+import {Words_Source } from "../words_source";
 
 const Game = () => {
 	const alphabet: string[] = [
 		"פ",
+		"ם",
+		"ן",
 		"ו",
 		"ט",
 		"א",
 		"ר",
 		"ק",
+		"ף",
+		"ך",
 		"ל",
 		"ח",
 		"י",
@@ -18,6 +24,7 @@ const Game = () => {
 		"ג",
 		"ד",
 		"ש",
+		"ץ",
 		"ת",
 		"צ",
 		"מ",
@@ -27,56 +34,15 @@ const Game = () => {
 		"ס",
 		"ז"
 	];
-	const words: string[] = [
-		"מעולה",
-		"קדמונ",
-		"מעולפ",
-		"אהובה",
-		"חמודה",
-		"ארמונ",
-		"מגילה",
-		"מניפה",
-		"חשמלי",
-		"מתקדמ",
-		"מערבי",
-		"מזרחי",
-		"מרוקו",
-		"ישראל",
-		"אנגליה",
-		"ברזיל",
-		"מכשיל",
-		"מאדימ",
-		"מחילה",
-		"מנהרה",
-		"ארגמן",
-		"מתנדב",
-		"מעורב",
-		"מחושב",
-		"מחושל",
-		"משוחד",
-		"מתבקש",
-		"מתבלט",
-		"מקודש",
-		"טיפקס",
-		"מגניב",
-		"מקסימ",
-		"ברווז",
-		"מוצלח",
-		""
-	];
 
-	let date = new Date();
-	let day = date.getDay();
-	let month = date.getMonth();
-
-	// Calculate days since Dec 1st 2012
-var initialDate = new Date("04/15/2022"); // Attention: month is zero-based
+// Calculate days since launch
+var initialDate = new Date("04/15/2022");
 var now = Date.now();
 var difference = now - initialDate.getTime();
 var millisecondsPerDay = 24 * 60 * 60 * 1000;
 var daysSince = Math.floor(difference / millisecondsPerDay);
 
-	const [ dailyWord, setDailyWord ] = useState<string>(words[day]); //The daily chosen word.
+	const [ dailyWord, setDailyWord ] = useState<string>(Words_Source[daysSince]); //The daily chosen word.
 	const [ win, setWin ] = useState<boolean>(false); //Will change to 'true' when win condition is fulfilled.
 	const [ currentRow, setCurrentRow ] = useState<number>(1); //The current row which letters are being added to.
 	const [ currentIndex, setCurrentIndex ] = useState<number>(0); //The current index in the word which letters are being added to.
@@ -89,6 +55,14 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 	const [ row5, setRow5 ] = useState<string[]>([ "", "", "", "", "" ]);
 	const [ row6, setRow6 ] = useState<string[]>([ "", "", "", "", "" ]);
 
+	const [ badTry1, setBadTry1] = useState(false);
+	const [ badTry2, setBadTry2] = useState(false);
+	const [ badTry3, setBadTry3] = useState(false);
+	const [ badTry4, setBadTry4] = useState(false);
+	const [ badTry5, setBadTry5] = useState(false);
+	const [ badTry6, setBadTry6] = useState(false);
+
+
 	const [ yellowCubes, setYellowCubes ] = useState<string[]>([]); // Array that stores the IDs of cubes that contain semi-correct guesses.
 	const [ greenCubes, setGreenCubes ] = useState<string[]>([]); // Array that stores the IDs of cubes that contain fully correct guesses.
 	const [ toReveal, setToReveal ] = useState<string[]>([]); //Array that stores the IDs of cubes that contain any guess, for styling purposes.
@@ -99,7 +73,12 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 	const [winRow, setWinRow] = useState<number>();
 	//Function to get how many times the same substring appears in a string, in our case - character in a word.
 	const getOccurrence = (value: string, word: string) => {
+		if(value !==""){
 		return word.split(value).length - 1;
+	}
+	else{
+		return 0;
+	}
 	};
 
 	const visualizeResult = () => {
@@ -281,67 +260,68 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 		visualizeResult();
 	};
 
-	// const returnParallelLetter = (character: string) => {
-	// 	if(character === "מ") {
-	// 		return "ם";
-	// 	}
-	// 	else if(character === "נ"){
-	// 		return "ן";
-	// 	}
-	// 	else if(character === "פ"){
-	// 		return "ף";
-	// 	}
-	// 	else if(character === "צ"){
-	// 		return "ץ";
-	// 	}
-	// 	else if(character === "ם"){
-	// 		return "מ";
-	// 	}
-	// 	else if(character === "ן"){
-	// 		return "נ";
-	// 	}
-	// 	else if(character === "ף"){
-	// 		return "פ";
-	// 	}
-	// 	else if(character === "ץ"){
-	// 		return "צ";
-	// 	}
-	// 	else{
-	// 		return "";
-	// 	}
-	// }
+	const returnParallelLetter = (character: string) => {
+		if(character === "מ") {
+			return "ם";
+		}
+		else if(character === "נ"){
+			return "ן";
+		}
+		else if(character === "פ"){
+			return "ף";
+		}
+		else if(character === "צ"){
+			return "ץ";
+		}
+		else if(character === "ם"){
+			return "מ";
+		}
+		else if(character === "ן"){
+			return "נ";
+		}
+		else if(character === "ף"){
+			return "פ";
+		}
+		else if(character === "ץ"){
+			return "צ";
+		}
+		else{
+			return "";
+		}
+	}
 
-	// const pushParallelLetter = (arr: string[]) => {
-	// 	if (arr.includes("נ") && !arr.includes("ן")) {
-	// 		arr.push("ן");
-	// 	}
-	// 	if (arr.includes("מ") && !arr.includes("ם")) {
-	// 		arr.push("ם");
-	// 	}
-	// 	if (arr.includes("צ") && !arr.includes("ץ")) {
-	// 		arr.push("ץ");
-	// 	}
-	// 	if (arr.includes("פ") && !arr.includes("ף")) {
-	// 		arr.push("ף");
-	// 	}
-	// 	if (arr.includes("ן") && !arr.includes("נ")) {
-	// 		arr.push("נ");
-	// 	}
-	// 	if (arr.includes("ם") && !arr.includes("מ")) {
-	// 		arr.push("מ");
-	// 	}
-	// 	if (arr.includes("ץ") && !arr.includes("צ")) {
-	// 		arr.push("צ");
-	// 	}
-	// 	if (arr.includes("ף") && !arr.includes("פ")) {
-	// 		arr.push("פ");
-	// 	}
-	// 	return;
-	// };
+	const pushParallelLetter = (arr: string[]) => {
+		if (arr.includes("נ") && !arr.includes("ן")) {
+			arr.push("ן");
+		}
+		if (arr.includes("מ") && !arr.includes("ם")) {
+			arr.push("ם");
+		}
+		if (arr.includes("צ") && !arr.includes("ץ")) {
+			arr.push("ץ");
+		}
+		if (arr.includes("פ") && !arr.includes("ף")) {
+			arr.push("ף");
+		}
+		if (arr.includes("ן") && !arr.includes("נ")) {
+			arr.push("נ");
+		}
+		if (arr.includes("ם") && !arr.includes("מ")) {
+			arr.push("מ");
+		}
+		if (arr.includes("ץ") && !arr.includes("צ")) {
+			arr.push("צ");
+		}
+		if (arr.includes("ף") && !arr.includes("פ")) {
+			arr.push("פ");
+		}
+		return;
+	};
 
 	// function that "uses up" a guess if the word exists in the word bank, and then displays if any letter matches or exists in the daily word.
 	const sendGuess = async () => {
 		if (currentIndex === 5) {
+
 			const greenLoad: string[] = greenCubes.slice();
 			const yellowLoad: string[] = yellowCubes.slice();
 			const revealLoad: string[] = toReveal.slice();
@@ -350,145 +330,237 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			const greenLettersLoad: string[] = greenLetters.slice();
 			let markedLetters: string[] = [];
 			if (currentRow === 1) {
+
+				if(!Words_Filter.includes(row1.join("")) && !Words_Source.includes(row1.join(""))){
+					setTimeout(() => setBadTry1(true), 100);
+					setBadTry1(false)
+					return;
+				}
+
 				for (let index = 0; index < row1.length; index++) {
-					let occurences: number = getOccurrence(row1[index], dailyWord);
+					let occurences: number = getOccurrence(row1[index], dailyWord) + getOccurrence(returnParallelLetter(row1[index]), dailyWord);
 					let markedTimes: number = getOccurrence(row1[index], markedLetters.toString());
-					if (dailyWord[index] === row1[index]) {
+					if (dailyWord[index] === row1[index] || dailyWord[index] === returnParallelLetter(row1[index])) {
 						markedLetters.push(row1[index]);
 						greenLoad.push(`key${index}`);
 						greenLettersLoad.push(row1[index]);
+						if (returnParallelLetter(row1[index]) !== ""){
+						markedLetters.push(returnParallelLetter(row1[index]));
+						greenLettersLoad.push(returnParallelLetter(row1[index]));
+						}
 					}
-					// else if ( dailyWord[index] === returnParallelLetter(row1[index])){
-					// 	markedLetters.push(returnParallelLetter(row1[index]));
-					// 	greenLoad.push(`key${index}`);
-					// 	greenLettersLoad.push(returnParallelLetter(row1[index]));
-					// }
 					else if (
-						dailyWord.includes(row1[index]) &&
+					(dailyWord.includes(row1[index]) || dailyWord.includes(returnParallelLetter(row1[index]))) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row1[index])))
 					) {
 						markedLetters.push(row1[index]);
 						yellowLoad.push(`key${index}`);
 						yellowLettersLoad.push(row1[index]);
+						if (returnParallelLetter(row1[index]) !== ""){
+							markedLetters.push(returnParallelLetter(row1[index]));
+							yellowLoad.push(`key${index}`);
+							yellowLettersLoad.push(returnParallelLetter(row1[index]));
+						}
 					}
-					// else if (
-					// 	dailyWord.includes(returnParallelLetter(row1[index])) &&
-					// 	((occurences > 1 && occurences > markedTimes) ||
-					// 		(occurences === 1 && !markedLetters.includes(returnParallelLetter(row1[index]))))
-					// ) {
-					// 	markedLetters.push(returnParallelLetter(row1[index]));
-					// 	yellowLoad.push(`key${index}`);
-					// 	yellowLettersLoad.push(returnParallelLetter(row1[index]));
-					// }
-					
 					else if (!greenCubes.includes(row1[index]) && !yellowCubes.includes(row1[index])) {
 						greyLettersLoad.push(row1[index]);
+						greyLettersLoad.push(returnParallelLetter(row1[index]));
 					}
 					revealLoad.push(`key${index}`);
 				}
 			} else if (currentRow === 2) {
+				if(!Words_Filter.includes(row2.join("")) && !Words_Source.includes(row2.join(""))){
+					setTimeout(() => setBadTry2(true), 100);
+					setBadTry1(false)
+					return;
+				}
+
 				for (let index = 0; index < row2.length; index++) {
-					let occurences: number = getOccurrence(row2[index], dailyWord);
+					let occurences: number = getOccurrence(row2[index], dailyWord) + getOccurrence(returnParallelLetter(row2[index]), dailyWord);
 					let markedTimes: number = getOccurrence(row2[index], markedLetters.toString());
-					if (dailyWord[index] === row2[index]) {
+					if (dailyWord[index] === row2[index] || dailyWord[index] === returnParallelLetter(row2[index])) {
 						markedLetters.push(row2[index]);
 						greenLoad.push(`key${index + 5}`);
 						greenLettersLoad.push(row2[index]);
-					} else if (
-						(dailyWord.includes(row2[index])) &&
+						if (returnParallelLetter(row2[index]) !== ""){
+						markedLetters.push(returnParallelLetter(row2[index]));
+						greenLettersLoad.push(returnParallelLetter(row2[index]));
+						}
+					}
+					else if (
+					(dailyWord.includes(row2[index]) || dailyWord.includes(returnParallelLetter(row2[index]))) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row2[index])))
 					) {
 						markedLetters.push(row2[index]);
 						yellowLoad.push(`key${index + 5}`);
 						yellowLettersLoad.push(row2[index]);
-					} else if (!greenCubes.includes(row2[index]) && !yellowCubes.includes(row2[index])) {
+						if (returnParallelLetter(row2[index]) !== ""){
+							markedLetters.push(returnParallelLetter(row2[index]));
+							yellowLoad.push(`key${index + 5}`);
+							yellowLettersLoad.push(returnParallelLetter(row2[index]));
+						}
+					}
+					else if (!greenCubes.includes(row2[index]) && !yellowCubes.includes(row2[index])) {
 						greyLettersLoad.push(row2[index]);
+						greyLettersLoad.push(returnParallelLetter(row2[index]));
 					}
 					revealLoad.push(`key${index + 5}`);
 				}
 			} else if (currentRow === 3) {
+				if(!Words_Filter.includes(row3.join("")) && !Words_Source.includes(row3.join(""))){
+					setTimeout(() => setBadTry3(true), 100);
+					setBadTry1(false)
+					return;
+				}
+
 				for (let index = 0; index < row3.length; index++) {
-					let occurences: number = getOccurrence(row3[index], dailyWord);
+					let occurences: number = getOccurrence(row3[index], dailyWord) + getOccurrence(returnParallelLetter(row3[index]), dailyWord);
 					let markedTimes: number = getOccurrence(row3[index], markedLetters.toString());
-					if (dailyWord[index] === row3[index]) {
+					if (dailyWord[index] === row3[index] || dailyWord[index] === returnParallelLetter(row3[index])) {
 						markedLetters.push(row3[index]);
 						greenLoad.push(`key${index + 10}`);
 						greenLettersLoad.push(row3[index]);
-					} else if (
-						dailyWord.includes(row3[index]) &&
+						if (returnParallelLetter(row3[index]) !== ""){
+						markedLetters.push(returnParallelLetter(row3[index]));
+						greenLettersLoad.push(returnParallelLetter(row3[index]));
+						}
+					}
+					else if (
+					(dailyWord.includes(row3[index]) || dailyWord.includes(returnParallelLetter(row3[index]))) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row3[index])))
 					) {
 						markedLetters.push(row3[index]);
 						yellowLoad.push(`key${index + 10}`);
 						yellowLettersLoad.push(row3[index]);
-					} else if (!greenCubes.includes(row3[index]) && !yellowCubes.includes(row3[index])) {
+						if (returnParallelLetter(row3[index]) !== ""){
+							markedLetters.push(returnParallelLetter(row3[index]));
+							yellowLoad.push(`key${index + 10}`);
+							yellowLettersLoad.push(returnParallelLetter(row3[index]));
+						}
+					}
+					else if (!greenCubes.includes(row3[index]) && !yellowCubes.includes(row3[index])) {
 						greyLettersLoad.push(row3[index]);
+						greyLettersLoad.push(returnParallelLetter(row3[index]));
 					}
 					revealLoad.push(`key${index + 10}`);
 				}
 			} else if (currentRow === 4) {
+				if(!Words_Filter.includes(row4.join("")) && !Words_Source.includes(row4.join(""))){
+					setTimeout(() => setBadTry4(true), 100);
+					setBadTry1(false)
+					return;
+				}
+
 				for (let index = 0; index < row4.length; index++) {
-					let occurences: number = getOccurrence(row4[index], dailyWord);
+					let occurences: number = getOccurrence(row4[index], dailyWord) + getOccurrence(returnParallelLetter(row4[index]), dailyWord);
 					let markedTimes: number = getOccurrence(row4[index], markedLetters.toString());
-					if (dailyWord[index] === row4[index]) {
+					if (dailyWord[index] === row4[index] || dailyWord[index] === returnParallelLetter(row4[index])) {
 						markedLetters.push(row4[index]);
 						greenLoad.push(`key${index + 15}`);
 						greenLettersLoad.push(row4[index]);
-					} else if (
-						dailyWord.includes(row4[index]) &&
+						if (returnParallelLetter(row4[index]) !== ""){
+						markedLetters.push(returnParallelLetter(row4[index]));
+						greenLettersLoad.push(returnParallelLetter(row4[index]));
+						}
+					}
+					else if (
+					(dailyWord.includes(row4[index]) || dailyWord.includes(returnParallelLetter(row4[index]))) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row4[index])))
 					) {
 						markedLetters.push(row4[index]);
 						yellowLoad.push(`key${index + 15}`);
 						yellowLettersLoad.push(row4[index]);
-					} else if (!greenCubes.includes(row4[index]) && !yellowCubes.includes(row4[index])) {
+						if (returnParallelLetter(row4[index]) !== ""){
+							markedLetters.push(returnParallelLetter(row4[index]));
+							yellowLoad.push(`key${index + 15}`);
+							yellowLettersLoad.push(returnParallelLetter(row4[index]));
+						}
+					}
+					else if (!greenCubes.includes(row4[index]) && !yellowCubes.includes(row4[index])) {
 						greyLettersLoad.push(row4[index]);
+						greyLettersLoad.push(returnParallelLetter(row4[index]));
 					}
 					revealLoad.push(`key${index + 15}`);
 				}
 			} else if (currentRow === 5) {
+				if(!Words_Filter.includes(row5.join("")) && !Words_Source.includes(row5.join(""))){
+					setTimeout(() => setBadTry5(true), 100);
+					setBadTry1(false)
+					return;
+				}
+
 				for (let index = 0; index < row5.length; index++) {
-					let occurences: number = getOccurrence(row5[index], dailyWord);
+					let occurences: number = getOccurrence(row5[index], dailyWord) + getOccurrence(returnParallelLetter(row5[index]), dailyWord);
 					let markedTimes: number = getOccurrence(row5[index], markedLetters.toString());
-					if (dailyWord[index] === row5[index]) {
+					if (dailyWord[index] === row5[index] || dailyWord[index] === returnParallelLetter(row5[index])) {
 						markedLetters.push(row5[index]);
 						greenLoad.push(`key${index + 20}`);
 						greenLettersLoad.push(row5[index]);
-					} else if (
-						dailyWord.includes(row5[index]) &&
+						if (returnParallelLetter(row5[index]) !== ""){
+						markedLetters.push(returnParallelLetter(row5[index]));
+						greenLettersLoad.push(returnParallelLetter(row5[index]));
+						}
+					}
+					else if (
+					(dailyWord.includes(row5[index]) || dailyWord.includes(returnParallelLetter(row5[index]))) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row5[index])))
 					) {
 						markedLetters.push(row5[index]);
 						yellowLoad.push(`key${index + 20}`);
 						yellowLettersLoad.push(row5[index]);
-					} else if (!greenCubes.includes(row5[index]) && !yellowCubes.includes(row5[index])) {
+						if (returnParallelLetter(row5[index]) !== ""){
+							markedLetters.push(returnParallelLetter(row5[index]));
+							yellowLoad.push(`key${index + 20}`);
+							yellowLettersLoad.push(returnParallelLetter(row5[index]));
+						}
+					}
+					else if (!greenCubes.includes(row5[index]) && !yellowCubes.includes(row5[index])) {
 						greyLettersLoad.push(row5[index]);
+						greyLettersLoad.push(returnParallelLetter(row5[index]));
 					}
 					revealLoad.push(`key${index + 20}`);
 				}
 			} else if (currentRow === 6) {
+				if(!Words_Filter.includes(row6.join("")) && !Words_Source.includes(row6.join(""))){
+					setTimeout(() => setBadTry6(true), 100);
+					setBadTry1(false)
+					return;
+				}
+
 				for (let index = 0; index < row6.length; index++) {
-					let occurences: number = getOccurrence(row6[index], dailyWord);
+					let occurences: number = getOccurrence(row6[index], dailyWord) + getOccurrence(returnParallelLetter(row6[index]), dailyWord);
 					let markedTimes: number = getOccurrence(row6[index], markedLetters.toString());
-					if (dailyWord[index] === row6[index]) {
+					if (dailyWord[index] === row6[index] || dailyWord[index] === returnParallelLetter(row6[index])) {
 						markedLetters.push(row6[index]);
 						greenLoad.push(`key${index + 25}`);
 						greenLettersLoad.push(row6[index]);
-					} else if (
-						dailyWord.includes(row6[index]) &&
+						if (returnParallelLetter(row6[index]) !== ""){
+						markedLetters.push(returnParallelLetter(row6[index]));
+						greenLettersLoad.push(returnParallelLetter(row6[index]));
+						}
+					}
+					else if (
+					(dailyWord.includes(row6[index]) || dailyWord.includes(returnParallelLetter(row6[index]))) &&
 						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row6[index])))
 					) {
 						markedLetters.push(row6[index]);
 						yellowLoad.push(`key${index + 25}`);
 						yellowLettersLoad.push(row6[index]);
-					} else if (!greenCubes.includes(row6[index]) && !yellowCubes.includes(row6[index])) {
+						if (returnParallelLetter(row6[index]) !== ""){
+							markedLetters.push(returnParallelLetter(row6[index]));
+							yellowLoad.push(`key${index + 25}`);
+							yellowLettersLoad.push(returnParallelLetter(row6[index]));
+						}
+					}
+					else if (!greenCubes.includes(row6[index]) && !yellowCubes.includes(row6[index])) {
 						greyLettersLoad.push(row6[index]);
+						greyLettersLoad.push(returnParallelLetter(row6[index]));
 					}
 					revealLoad.push(`key${index + 25}`);
 				}
@@ -600,7 +672,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 	return (
 		<div className="game">
 			<div className={`cube-grid ${win === true ? "win-animation" : ""}`}>
-				<div className="cube-row">
+				<div className={`cube-row ${badTry1 === true ? "not-exist-animation" : ""}`}>
 					{row1.map((value, key) => (
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + key)
@@ -615,7 +687,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 						</p>
 					))}
 				</div>
-				<div className="cube-row">
+				<div className={`cube-row ${badTry2 === true ? "not-exist-animation" : ""}`}>
 					{row2.map((value, key) => (
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 5))
@@ -630,7 +702,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 						</p>
 					))}
 				</div>
-				<div className="cube-row">
+				<div className={`cube-row ${badTry3 === true ? "not-exist-animation" : ""}`}>
 					{row3.map((value, key) => (
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 10))
@@ -643,7 +715,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 						</p>
 					))}
 				</div>
-				<div className="cube-row">
+				<div className={`cube-row ${badTry4 === true ? "not-exist-animation" : ""}`}>
 					{row4.map((value, key) => (
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 15))
@@ -656,7 +728,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 						</p>
 					))}
 				</div>
-				<div className="cube-row">
+				<div className={`cube-row ${badTry5 === true ? "not-exist-animation" : ""}`}>
 					{row5.map((value, key) => (
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 20))
@@ -669,7 +741,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 						</p>
 					))}
 				</div>
-				<div className="cube-row">
+				<div className={`cube-row ${badTry6 === true ? "not-exist-animation" : ""}`}>
 					{row6.map((value, key) => (
 						<p
 							className={`text-cube ${yellowCubes.includes("key" + (key + 25))
@@ -689,7 +761,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 					<p className="letter-cube backspace" onClick={() => backspacePress()}>
 						<FontAwesomeIcon icon={faBackspace} />
 					</p>
-					{alphabet.slice(0, 7).map((value, key) => (
+					{alphabet.slice(0, 8).map((value, key) => (
 						<p
 							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
 							 ${greenLetters.includes(value) ? "green-cube" : ""}
@@ -700,7 +772,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 					))}
 				</div>
 				<div className="letter-row">
-					{alphabet.slice(7, 16).map((value, key) => (
+					{alphabet.slice(8, 18).map((value, key) => (
 						<p
 							className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
 							${greenLetters.includes(value) ? "green-cube" : ""}
@@ -711,7 +783,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 					))}
 				</div>
 				<div className="letter-row">
-					{alphabet.slice(16).map(
+					{alphabet.slice(18).map(
 						(value, key) =>
 								<p
 									className={`letter-cube ${greyLetters.includes(value) ? "blacken" : ""}
