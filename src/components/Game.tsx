@@ -679,7 +679,6 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 	useEffect(() => {
 
 		const handleKeyDown = (e :any) => {
-			console.log('e.key---->', e.key)
 			if(e.key === "Backspace"){
 				backspacePress();
 			}
@@ -687,7 +686,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 				sendGuess();
 			}
 			else{
-			letterPress(e.key)
+			letterPress(e.key);
 			}
 		}
 		document.addEventListener('keydown', handleKeyDown );
