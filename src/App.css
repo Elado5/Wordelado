@@ -290,6 +290,7 @@
   bottom: 42vh;
   position: absolute;
   color: white;
+  border-radius: 0.5rem;
 }
 
 @media screen and (max-height: 1079px) {

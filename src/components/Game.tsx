@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 import { Words_Filter } from "../words_filter";
@@ -71,6 +71,12 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 	const [ greenLetters, setGreenLetters ] = useState<string[]>([]);
 
 	const [winRow, setWinRow] = useState<number>();
+
+	//returns if string is in Hebrew
+	const containsHeb = (str :string) => {
+		return (/[\u0590-\u05FF]/).test(str);
+	}
+
 	//Function to get how many times the same substring appears in a string, in our case - character in a word.
 	const getOccurrence = (value: string, word: string) => {
 		if(value !==""){
@@ -186,7 +192,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 
 	//What happens when you click a letter on the virtual keyboard.
 	const letterPress = (letter: string) => {
-		if (currentIndex > 4 || currentIndex < 0) {
+		if (currentIndex > 4 || currentIndex < 0 || !containsHeb(letter)) {
 			return;
 		}
 		if (currentRow === 1) {
@@ -668,6 +674,28 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			alert(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`);
 		}
 	};
+
+
+	useEffect(() => {
+
+		const handleKeyDown = (e :any) => {
+			console.log('e.key---->', e.key)
+			if(e.key === "Backspace"){
+				backspacePress();
+			}
+			else if(e.key === "Enter"){
+				sendGuess();
+			}
+			else{
+			letterPress(e.key)
+			}
+		}
+		document.addEventListener('keydown', handleKeyDown );
+	  return () => {
+		document.removeEventListener('keydown', handleKeyDown);
+	}
+	}, [letterPress, backspacePress]);
+	
 
 	return (
 		<div className="game">
