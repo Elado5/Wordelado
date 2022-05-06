@@ -7,7 +7,7 @@ const FloatHelp = () => {
     return(
     <div className={`Float ${showHelp ? '' : 'hidden'} hidden`} onClick={() => {setShowHelp(false)} }>
         <h1>איך משחקים?</h1>
-        <p>נחשו את המילה בתוך שישה נסיונות או פחות. כל ניסיון הוא מילה בת חמש אותיות בדיוק.
+        <p>נחשו את המילה בתוך שישה נסיונות או פחות.<br/> כל ניסיון הוא מילה בת חמש אותיות בדיוק.<br/>
         אחרי כל ניסיון, האותיות ייצבעו בצבעים שמשקפים עד כמה הניחוש קרוב למילה שנבחרה.           
         </p>
         <hr/>
@@ -31,11 +31,11 @@ const FloatHelp = () => {
         <hr/>
 
         <div className="cube-row">
-            <div className=" text-cube">א</div>
-            <div className=" text-cube revealing">ר</div>
-            <div className=" text-cube">ו</div>
-            <div className=" text-cube ">ח</div>
-            <div className=" text-cube ">ה</div>
+            <div className=" text-cube">מ</div>
+            <div className=" text-cube revealing">ש</div>
+            <div className=" text-cube">ח</div>
+            <div className=" text-cube ">ק</div>
+            <div className=" text-cube ">ת</div>
         </div>
         <p>אות שמסומנת באפור לא קיימת במילה.</p>
     </div>
