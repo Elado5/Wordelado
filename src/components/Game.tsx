@@ -326,6 +326,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 */
 	// function that "uses up" a guess if the word exists in the word bank, and then displays if any letter matches or exists in the daily word.
 	const sendGuess = async () => {
+
 		if (currentIndex === 5) {
 
 			const greenLoad: string[] = greenCubes.slice();
@@ -359,7 +360,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 					}
 					else if (
 						(dailyWord.includes(row[index]) || dailyWord.includes(returnParallelLetter(row[index]))) &&
-						((occurences > 1 && occurences > markedTimes && occurencesInWord > 1) ||
+						((occurences > 1 && occurences > markedTimes) ||
 							(occurences === 1 && !markedLetters.includes(row[index])))
 					) {
 						markedLetters.push(row[index]);
@@ -377,23 +378,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 					}
 					revealLoad.push(`key${index + indexIncrease}`);
 				}
-			}
-
-			if (currentRow === 1) {
-				handleRow(row1, setBadTry1, 0);
-			} else if (currentRow === 2) {
-				handleRow(row2, setBadTry2, 5);
-			} else if (currentRow === 3) {
-				handleRow(row3, setBadTry3, 10);
-			} else if (currentRow === 4) {
-				handleRow(row4, setBadTry4, 15);
-			} else if (currentRow === 5) {
-				handleRow(row5, setBadTry5, 20);
-			} else if (currentRow === 6) {
-				handleRow(row6, setBadTry6, 25);
-			}
-			console.log('yellowLettersLoad', yellowLettersLoad);
-			setGreenCubes(greenLoad);
+				setGreenCubes(greenLoad);
 			setYellowCubes(yellowLoad);
 			setToReveal(revealLoad);
 			greyLetters.forEach((item) => {
@@ -412,6 +397,21 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			setCurrentRow(currentRow + 1);
 			setCurrentIndex(0);
 			checkWin(greenLoad);
+			}
+
+			if (currentRow === 1) {
+				handleRow(row1, setBadTry1, 0);
+			} else if (currentRow === 2) {
+				handleRow(row2, setBadTry2, 5);
+			} else if (currentRow === 3) {
+				handleRow(row3, setBadTry3, 10);
+			} else if (currentRow === 4) {
+				handleRow(row4, setBadTry4, 15);
+			} else if (currentRow === 5) {
+				handleRow(row5, setBadTry5, 20);
+			} else if (currentRow === 6) {
+				handleRow(row6, setBadTry6, 25);
+			}
 		}
 		return;
 	};
