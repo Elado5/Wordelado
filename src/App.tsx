@@ -11,9 +11,9 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar setShowHelp={setShowHelp}/>
       <Game/>
-      <FloatHelp/>
+      <FloatHelp showHelp={showHelp} setShowHelp={setShowHelp}/>
     </div>
   );
 }

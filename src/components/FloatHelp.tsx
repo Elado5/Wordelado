@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
+import {showHelpType, setShowHelpType} from '../implementation';
 
-const FloatHelp = () => {
-
-    const [showHelp, setShowHelp] = useState(true);
+const FloatHelp = ({showHelp, setShowHelp} : {showHelp: showHelpType, setShowHelp: setShowHelpType}) => {
 
     return(
-    <div className={`Float ${showHelp ? '' : 'hidden'} hidden`} onClick={() => {setShowHelp(false)} }>
+    <div className={`Float ${showHelp ? '' : 'hidden'}`} onClick={() => {setShowHelp(false)} }>
         <h1>איך משחקים?</h1>
         <p>נחשו את המילה בתוך שישה נסיונות או פחות.<br/> כל ניסיון הוא מילה בת חמש אותיות בדיוק.<br/>
         אחרי כל ניסיון, האותיות ייצבעו בצבעים שמשקפים עד כמה הניחוש קרוב למילה שנבחרה.           
