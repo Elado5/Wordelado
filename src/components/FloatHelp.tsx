@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {showHelpType, setShowHelpType} from '../implementation';
+import {useStateType, setUseStateType} from '../implementation';
 
-const FloatHelp = ({showHelp, setShowHelp} : {showHelp: showHelpType, setShowHelp: setShowHelpType}) => {
+const FloatHelp = ({showHelp, setShowHelp} : {showHelp: useStateType, setShowHelp: setUseStateType}) => {
 
     return(
     <div className={`Float ${showHelp ? '' : 'hidden'}`} onClick={() => {setShowHelp(false)} }>

@@ -8,10 +8,11 @@ import './App.scss';
 function App() {
 
   const [showHelp, setShowHelp] = useState(false);
+  const [lightTheme, setLightTheme] = useState(false);
 
   return (
-    <div className="App">
-      <Navbar setShowHelp={setShowHelp}/>
+    <div className={`App ${lightTheme ? 'light-theme' : ""}`}>
+      <Navbar setShowHelp={setShowHelp} lightTheme={lightTheme} setLightTheme={setLightTheme}/>
       <Game/>
       <FloatHelp showHelp={showHelp} setShowHelp={setShowHelp}/>
     </div>

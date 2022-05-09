@@ -8,10 +8,24 @@ $wordleYellow: #b59f3b;
 
 .App {
 	background-color: rgb(30, 30, 30);
+	transition: ease-in-out 0.33s;
 	display: flex;
 	flex-direction: column;
 	align-content: center;
 	height: 100vh;
+}
+.light-theme {
+	background-color: rgb(240, 240, 240);
+	.revealing {
+		background-color: rgb(140, 140, 140);
+	}
+	p {
+		color: black !important;
+		text-shadow: 0 0 4px rgba(255, 255, 255, 0.25);
+	}
+	.navbar {
+		background-color: rgb(75, 75, 75);
+	}
 }
 
 .navbar {
@@ -37,10 +51,10 @@ $wordleYellow: #b59f3b;
 		align-items: center;
 		font-size: 1.3rem;
 		.title-half {
-			color: rgb(183, 177, 158);
+			color: rgb(183, 177, 158) !important;
 		}
 		.title-half2 {
-			color: rgb(167, 197, 174);
+			color: rgb(167, 197, 174) !important;
 		}
 	}
 
@@ -57,7 +71,6 @@ $wordleYellow: #b59f3b;
 	background-color: $wordleYellow !important;
 	transition: ease-in-out 0.5;
 }
-
 
 .game {
 	align-self: center;
@@ -126,7 +139,8 @@ $wordleYellow: #b59f3b;
 			color: white;
 			width: 3rem;
 			height: 3rem;
-			margin-right: 0.3rem;
+			margin-right: 0.15rem;
+			margin-left: 0.15rem;
 			justify-content: center;
 			align-items: center;
 			text-align: center;
@@ -134,13 +148,12 @@ $wordleYellow: #b59f3b;
 				transition: ease-in-out 0.3s;
 				background-color: rgb(170, 170, 170);
 			}
-
 		}
 		.enter,
 		.backspace {
 			width: 7vh;
 		}
-		.blacken{
+		.blacken {
 			background-color: rgb(70, 70, 70);
 			transition: ease-in-out 0.5s;
 		}
@@ -156,8 +169,8 @@ $wordleYellow: #b59f3b;
 .revealing {
 	border: solid lightgray 2px !important;
 	background-color: #3a3a3c;
-    animation: flipInX; /* referring directly to the animation's @keyframe declaration */
-  	animation-duration: 1s;
+	animation: flipInX; /* referring directly to the animation's @keyframe declaration */
+	animation-duration: 1s;
 }
 
 .win-animation {
@@ -165,16 +178,16 @@ $wordleYellow: #b59f3b;
 	animation-duration: 1s;
 }
 
-.not-exist-animation{
+.not-exist-animation {
 	animation: flash;
 	animation-duration: 0.75s;
 }
 
-.Float{
+.Float {
 	position: absolute;
 	z-index: 5;
 	color: white;
-	display:flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -184,14 +197,14 @@ $wordleYellow: #b59f3b;
 	width: 100%;
 	height: 100vh;
 	top: 0;
-	h1{
+	h1 {
 		color: $wordleGreen;
 	}
-	hr{
+	hr {
 		width: 20%;
 		border: 1px solid rgba(255, 255, 255, 0.25);
 	}
-	.cube-row{
+	.cube-row {
 		display: flex;
 		flex-direction: row;
 		margin: 0.75rem;
@@ -211,22 +224,27 @@ $wordleYellow: #b59f3b;
 	}
 }
 
-.hidden{
+.hidden {
 	display: none;
 }
 
-.result-button{
-    align-self: center;
-    width: 15%;
-    height: 26px;
-    z-index: 5;
-    background-color: $wordleGreen;
-    bottom: 42vh;
-    position: absolute;
-	color:white;
+.result-button {
+	align-self: center;
+	width: 15%;
+	height: 26px;
+	z-index: 5;
+	background-color: $wordleGreen;
+	bottom: 42vh;
+	position: absolute;
+	color: white;
 	border-radius: 0.5rem;
-	@media screen and (max-height: 1079px){
+	@media screen and (max-height: 1079px) {
 		font-size: 0.6rem;
 		bottom: 42.5vh;
 	}
+}
+
+.dropdown-menu {
+	position: absolute;
+	margin-right: -17.5px;
 }
