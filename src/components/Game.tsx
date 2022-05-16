@@ -70,7 +70,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 	const [ yellowLetters, setYellowLetters ] = useState<string[]>([]);
 	const [ greenLetters, setGreenLetters ] = useState<string[]>([]);
 
-	const [winRow, setWinRow] = useState<number>();
+	const [winRow, setWinRow] = useState<any>();
 
 	//returns if string is in Hebrew
 	const containsHeb = (str :string) => {
@@ -490,6 +490,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 
 		} else if (currentRow === 6) {
 			alert(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`);
+			setWinRow("X");
 		}
 	};
 
