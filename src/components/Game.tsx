@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackspace } from "@fortawesome/free-solid-svg-icons";
 import { Words_Filter } from "../words_filter";
@@ -426,7 +427,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			arr.includes("key4")
 		) {
 			setWin(true);
-			alert("ניסיון אחד? מדהים!");
+			toast.success("ניסיון אחד? מדהים!");
 			setWinRow(1);
 			setCurrentRow(8);
 		} else if (
@@ -436,7 +437,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			arr.includes("key8") &&
 			arr.includes("key9")
 		) {
-			alert("שני נסיונות? עבודה מעולה!");
+			toast.success("שני נסיונות? עבודה מעולה!");
 			setCurrentRow(8);
 			setWin(true);
 			setWinRow(2);
@@ -447,7 +448,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			arr.includes("key13") &&
 			arr.includes("key14")
 		) {
-			alert("שלושה נסיונות, מרשים!");
+			toast.success("שלושה נסיונות, מרשים!");
 			setCurrentRow(8);
 			setWin(true);
 			setWinRow(3);
@@ -459,7 +460,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			arr.includes("key18") &&
 			arr.includes("key19")
 		) {
-			alert("כל הכבוד!");
+			toast.success("כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
 			setWinRow(4);
@@ -471,7 +472,7 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			arr.includes("key23") &&
 			arr.includes("key24")
 		) {
-			alert("זה היה דיי קרוב, כל הכבוד!");
+			toast.success("זה היה דיי קרוב, כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
 			setWinRow(5);
@@ -483,13 +484,13 @@ var daysSince = Math.floor(difference / millisecondsPerDay);
 			arr.includes("key28") &&
 			arr.includes("key29")
 		) {
-			alert("זה היה ממש קרוב, כל הכבוד!");
+			toast.success("זה היה ממש קרוב, כל הכבוד!");
 			setCurrentRow(8);
 			setWin(true);
 			setWinRow(6);
 
 		} else if (currentRow === 6) {
-			alert(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`);
+			toast.error(`המילה היומית הייתה '${dailyWord}', בהצלחה בפעם הבאה!`);
 			setWinRow("X");
 		}
 	};
